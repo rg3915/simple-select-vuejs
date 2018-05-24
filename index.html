@@ -29,17 +29,15 @@
       <a href="https://github.com/rg3915/simple-select-vuejs/" target="_blank">GitHub: https://github.com/rg3915/simple-select-vuejs/</a>
       <hr>
 
-      <a id="modal-preview" href="#modal-container-preview" role="button" class="btn btn-primary" data-toggle="modal">Preview</a>
-
-      <div class="text-uppercase text-bold">Number selected: {{ selected }}</div>
-      <div class="text-uppercase text-bold">Total selected: {{ selected.length }}</div>
+      <a id="modal-preview" href="#modal-container-preview" role="button" class="btn btn-primary" data-toggle="modal">Abrir Preview</a>
+      <a class="btn btn-primary" @click="addToPreview()">Adicionar Ao preview</a>
 
       <table class="table table-striped table-hover">
         <thead>
           <tr>
             <th>
               <label class="mycontainer">Select All
-                <input type="checkbox" v-model="selectAll" @click="select">
+                <input type="checkbox" v-model="selectAll" > <!-- @click="select" --> 
                 <span class="checkmark"></span>
               </label>
             </th>
@@ -49,10 +47,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in items">
+          <tr v-for="item in all_items">
             <td>
               <label class="mycontainer">{{ item.number }}
-                <input type="checkbox" :value="item.number" v-model="selected">
+                <input type="checkbox" v-model="item.selected">
                 <span class="checkmark"></span>
               </label>
             </td>
@@ -71,7 +69,8 @@
       </table>
     </div>
 
-  <div class="modal fade" id="modal-container-preview" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="modal-container-preview" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -79,7 +78,7 @@
             ×
           </button>
           <h4 class="modal-title" id="myModalLabel">
-            Items Selected: {{ selected.length }}
+            Items Selected: {{ selected_items.length }}
           </h4>
         </div>
         <div class="modal-body">
@@ -88,7 +87,7 @@
               <tr>
                 <th>
                   <label class="mycontainer">Select All
-                    <input type="checkbox" v-model="selectAll" @click="select">
+                    <input type="checkbox" v-model="selectAll" > <!-- @click="select" -->
                     <span class="checkmark"></span>
                   </label>
                 </th>
@@ -101,7 +100,7 @@
               <tr v-for="item in selected_items">
                 <td>
                   <label class="mycontainer">{{ item.number }}
-                    <input type="checkbox" :value="item.number" v-model="selected">
+                    <input type="checkbox" v-model="item.selected">
                     <span class="checkmark"></span>
                   </label>
                 </td>
@@ -125,6 +124,9 @@
           </button>
           <button type="button" class="btn btn-primary">
             Save changes
+          </button>
+          <button type="button" class="btn btn-primary" @click="removeFromPreview()">
+            Remover do preview
           </button>
         </div>
       </div>
