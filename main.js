@@ -2,7 +2,8 @@ var app = new Vue({
   el: '#app',
   data: {
     all_items: [],
-    // selected: [],
+    selected: [],
+    selected2: [],
     selected_items: [],
     selectAll: false,
   },
@@ -16,29 +17,30 @@ var app = new Vue({
       })
     },
     addToPreview(){
+      // Copia os itens selecionados para a outra lista.
       this.selected_items = this.all_items.filter(item => item.selected)
-      this.all_items = this.all_items.filter(item => !item.selected)
-      this.selected_items.map(item => {
-        item.selected = false
-      })
+      // Desativa a seleção da lista principal.
+      // this.selected_items.map(item => {
+      //   item.selected = false
+      // })
     },
     removeFromPreview(){
       window.alert('Exercicio pro Regis')
+    },
+    select(){
+      this.selected = [];
+      this.selected_items = [];
+      if (!this.selectAll) {
+        for (let i in this.all_items) {
+          this.item.selected.push(this.items[i].number);
+        }
+        // for (let j in this.all_items) {
+        //   this.selected_items.push(
+        //     {number: this.all_items[j].number, id: this.all_items[j].id, title: this.all_items[j].title, state: this.all_items[j].state, url: this.all_items[j].url}
+        //   );
+        // }
+      }
     }
-    // select(){
-    //   this.selected = [];
-    //   this.selected_items = [];
-    //   if (!this.selectAll) {
-    //     for (let i in this.items) {
-    //       this.selected.push(this.items[i].number);
-    //     }
-    //     for (let j in this.items) {
-    //       this.selected_items.push(
-    //         {number: this.items[j].number, id: this.items[j].id, title: this.items[j].title, state: this.items[j].state, url: this.items[j].url}
-    //       );
-    //     }
-    //   }
-    // }
   },
   watch: {
     // selected(value){

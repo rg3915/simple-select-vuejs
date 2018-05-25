@@ -29,15 +29,16 @@
       <a href="https://github.com/rg3915/simple-select-vuejs/" target="_blank">GitHub: https://github.com/rg3915/simple-select-vuejs/</a>
       <hr>
 
-      <a id="modal-preview" href="#modal-container-preview" role="button" class="btn btn-primary" data-toggle="modal">Abrir Preview</a>
-      <a class="btn btn-primary" @click="addToPreview()">Adicionar Ao preview</a>
+      <a id="modal-preview" href="#modal-container-preview" role="button" class="btn btn-primary" data-toggle="modal" @click="addToPreview()">Preview</a>
+      <div class="text-uppercase text-bold">Number selected: {{ selected }}</div>
+      <div class="text-uppercase text-bold">Total selected: {{ selected.length }}</div>
 
       <table class="table table-striped table-hover">
         <thead>
           <tr>
             <th>
               <label class="mycontainer">Select All
-                <input type="checkbox" v-model="selectAll" > <!-- @click="select" --> 
+                <input type="checkbox" v-model="selectAll" @click="select">
                 <span class="checkmark"></span>
               </label>
             </th>
@@ -50,7 +51,7 @@
           <tr v-for="item in all_items">
             <td>
               <label class="mycontainer">{{ item.number }}
-                <input type="checkbox" v-model="item.selected">
+                <input type="checkbox" v-model="item.selected"> <!-- item.selected -->
                 <span class="checkmark"></span>
               </label>
             </td>
