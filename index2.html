@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="https://vuejs.org/images/logo.png">
+  <title>Simple Select VueJS</title>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Font-awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="https://unpkg.com/spectre.css@0.5.1/dist/spectre.min.css"> -->
+  <link rel="stylesheet" href="style.css">
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!-- Bootstrap core JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <div class="container">
+      <h1>Lista de Issues do projeto <a href="https://github.com/rg3915/django-experience" target="_blank">django-experience</a></h1>
+      <a href="https://vuejsexamples.com/vuejs-tables-and-select-all-checkbox/" target="_blank">https://vuejsexamples.com/vuejs-tables-and-select-all-checkbox/</a>
+      <br>
+      <br>
+      <a href="https://github.com/rg3915/simple-select-vuejs/" target="_blank">GitHub: https://github.com/rg3915/simple-select-vuejs/</a>
+      <hr>
+
+      <a id="modal-preview" href="#modal-container-preview" role="button" class="btn btn-primary" data-toggle="modal" @click="addToPreview()">Preview</a>
+      <div class="text-uppercase text-bold">Number selected: {{ selected }}</div>
+      <div class="text-uppercase text-bold">Total selected: {{ selected.length }}</div>
+
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>
+              <label class="mycontainer">Select All
+                <input type="checkbox" v-model="selectedAll" @click="selectAll">
+                <span class="checkmark"></span>
+              </label>
+            </th>
+            <th class="text-center">ID</th>
+            <th>Title</th>
+            <th class="text-center">State</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in items" :key="item.number">
+            <td>
+              <label class="mycontainer">{{ item.number }}
+                <input type="checkbox" v-model="item.selected" @click="select(item.number)">
+                <span class="checkmark"></span>
+              </label>
+            </td>
+            <td>{{ item.number }} - {{ item.selected }}</td>
+            <td class="text-center">{{ item.id }}</td>
+            <td ><a :href="item.url" target="_blank">{{ item.title }}</a></td>
+            <td class="text-center">
+              <span v-if="item.state === 'open'">
+                <i class="fa fa-check-circle-o ok"></i>
+              </span>
+              <span v-else>
+                <i class="fa fa-times-circle-o no"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  <div class="modal fade" id="modal-container-preview" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            ×
+          </button>
+          <h4 class="modal-title" id="myModalLabel">
+            Items Selected: {{ selected.length }} <!-- selected_items.length -->
+          </h4>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>
+                  <label class="mycontainer">Select All
+                    <input type="checkbox"> <!-- v-model="selectAll" @click="select" -->
+                    <span class="checkmark"></span>
+                  </label>
+                </th>
+                <th class="text-center">ID</th>
+                <th>Title</th>
+                <th class="text-center">State</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in selected_items">
+                <td>
+                  <label class="mycontainer">{{ item.number }}
+                    <input type="checkbox" v-model="item.selected2">
+                    <span class="checkmark"></span>
+                  </label>
+                </td>
+                <td class="text-center">{{ item.id }}</td>
+                <td ><a :href="item.url" target="_blank">{{ item.title }}</a></td>
+                <td class="text-center">
+                  <span v-if="item.state === 'open'">
+                    <i class="fa fa-check-circle-o ok"></i>
+                  </span>
+                  <span v-else>
+                    <i class="fa fa-times-circle-o no"></i>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">
+            Save changes
+          </button>
+          <button type="button" class="btn btn-primary" @click="removeFromPreview()">
+            Remover do preview
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  <script src="main.js"></script>
+
+</body>
+</html>
