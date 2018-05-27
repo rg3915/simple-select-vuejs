@@ -17,9 +17,6 @@ var app = new Vue({
         })
       })
     },
-    removeFromPreview(){
-      window.alert('Exercicio pro Regis')
-    },
     selectAll(){
       this.selected = [];
       this.preview_items = [];
@@ -43,6 +40,9 @@ var app = new Vue({
           this.selected_preview.push(this.preview_items[i].number);
         }
       }
+    },
+    savePreview(){
+      window.alert('Save ' + this.selected_preview)
     }
   },
   watch: {
