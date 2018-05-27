@@ -29,7 +29,7 @@
       <a href="https://github.com/rg3915/simple-select-vuejs/" target="_blank">GitHub: https://github.com/rg3915/simple-select-vuejs/</a>
       <hr>
 
-      <a id="modal-preview" href="#modal-container-preview" role="button" class="btn btn-primary" data-toggle="modal">Preview</a>
+      <a id="modal-preview" href="#modal-container-preview" role="button" class="btn btn-primary" data-toggle="modal" :disabled="show_preview">Preview</a>
       <div class="text-uppercase text-bold">Selected: {{ selected.length }} - {{ selected }}</div>
       <div class="text-uppercase text-bold">Preview: {{ selected_preview.length }} - {{ selected_preview }}</div>
 
@@ -37,7 +37,7 @@
         <thead>
           <tr>
             <th>
-              <label class="mycontainer">Select All
+              <label class="mycontainer">{{ my_label }}
                 <input type="checkbox" v-model="selected_all" @click="selectAll">
                 <span class="checkmark"></span>
               </label>
@@ -87,7 +87,7 @@
             <thead>
               <tr>
                 <th>
-                  <label class="mycontainer">Select All
+                  <label class="mycontainer">{{ my_label_preview }}
                     <input type="checkbox" v-model="selected_all_preview" @click="selectAllPreview">
                     <span class="checkmark"></span>
                   </label>

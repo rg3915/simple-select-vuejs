@@ -7,6 +7,9 @@ var app = new Vue({
     selected_preview: [],
     selected_all: false,
     selected_all_preview: false,
+    my_label: 'Select All',
+    my_label_preview: 'Clear Filter',
+    show_preview: true
   },
   methods: {
     list_items(){
@@ -29,6 +32,11 @@ var app = new Vue({
         // Uma lista é cópia da outra.
         this.preview_items = this.items
         this.selected_all_preview = true
+        this.my_label = 'Clear Filter'
+        this.show_preview = false
+      } else {
+        this.my_label = 'Select All'
+        this.show_preview = true
       }
     },
     selectAllPreview(){
@@ -39,6 +47,9 @@ var app = new Vue({
           // usado para saber quais os itens que foram selecionados.
           this.selected_preview.push(this.preview_items[i].number);
         }
+        this.my_label_preview = 'Clear Filter'
+      } else {
+        this.my_label_preview = 'Select All'
       }
     },
     savePreview(){
