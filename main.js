@@ -33,10 +33,10 @@ var app = new Vue({
         this.preview_items = this.items
         this.selected_all_preview = true
         this.my_label = 'Clear Filter'
-        this.show_preview = false
+        this.show_preview = true
       } else {
         this.my_label = 'Select All'
-        this.show_preview = true
+        this.show_preview = false
       }
     },
     selectAllPreview(){
@@ -64,6 +64,11 @@ var app = new Vue({
       );
       // Ao abrir o modal os itens estão ticados.
       this.selected_preview = this.selected
+      if (this.selected.length > 0) {
+        this.show_preview = false
+      } else {
+        this.show_preview = true
+      }
     }
   },
   mounted(){
